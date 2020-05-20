@@ -195,7 +195,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(2);
 					Scanner updateCell = new Scanner(System.in);
 			        String userLastname = "";
-			        System.out.print("Please Enter A New Firstname: ");
+			        System.out.print("Please Enter A New Lastname: ");
 			        userLastname = updateCell.nextLine();
 					cellUpdate.setCellValue(userLastname);
 					inputStream.close();
@@ -208,7 +208,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(2);
 					Scanner updateCell = new Scanner(System.in);
 			        String userPhonenumber = "";
-			        System.out.print("Please Enter A New Lastname: ");
+			        System.out.print("Please Enter A New Phonenumber: ");
 			        userPhonenumber = updateCell.nextLine();
 					cellUpdate.setCellValue(userPhonenumber);
 					inputStream.close();
