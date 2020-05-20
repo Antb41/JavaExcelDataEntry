@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -32,23 +33,55 @@ public class Main {
 	        Sheet sheet = workbook.createSheet("First sheet");
 	        
 	        //Create a new row within sheet, first row index will be 0
-	        Row row = sheet.createRow(0);
+	        Row header = sheet.createRow(0);
 	        
-	        //Create cells within the rows on the new sheet
-	        Cell cell = row.createCell(0);
-	        cell.setCellValue("Column A");
+	        //Create header cells within the rows on the new sheet
+	        Cell cell_header = header.createCell(0);
+	        cell_header.setCellValue("ID");
 	        
-	        cell = row.createCell(1);
-	        cell.setCellValue("Column B");
+	        cell_header = header.createCell(1);
+	        cell_header.setCellValue("FIRSTNAME");
 	        
-	        cell = row.createCell(2);
-	        cell.setCellValue("Column C");
+	        cell_header = header.createCell(2);
+	        cell_header.setCellValue("LASTNAME");
 	        
-	        cell = row.createCell(3);
-	        cell.setCellValue("Column D");
+	        cell_header = header.createCell(3);
+	        cell_header.setCellValue("PHONENUMBER");
 	        
-	        cell = row.createCell(4);
-	        cell.setCellValue("Column E");
+	        //Create data row and cells for header cells, allow for user input using scanner
+	        Scanner input = new Scanner(System.in);
+	        
+	        Row row_1 = sheet.createRow(1);  
+	        
+	        Cell cell_1 = row_1.createCell(0);
+	        String userId = "";
+	        System.out.print("Please Enter Your ID number: ");
+	        userId = input.nextLine();
+	        System.out.println();
+	        cell_1.setCellValue(userId);
+	        
+	        cell_1 = row_1.createCell(1);
+	        String userFirstname = "";
+	        System.out.print("Please Enter Your Firstname: ");
+	        userFirstname = input.nextLine();
+	        System.out.println();
+	        cell_1.setCellValue(userFirstname);
+	        
+	        cell_1 = row_1.createCell(2);
+	        String userLastname = "";
+	        System.out.print("Please Enter Your Lastname: ");
+	        userLastname = input.nextLine();
+	        System.out.println();
+	        cell_1.setCellValue(userLastname);
+	        
+	        cell_1 = row_1.createCell(3);
+	        String userPhonenumber = "";
+	        System.out.print("Please Enter Your Phonenumber: ");
+	        userPhonenumber = input.nextLine();
+	        System.out.println();
+	        cell_1.setCellValue(userPhonenumber);
+	        
+	        
 	        
 			//Save the workbook to the file system
 			workbook.write(outputFile);
