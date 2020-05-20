@@ -18,7 +18,7 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		
 		//Location where Excel files are stored for this project, can be any destination
-		String excellFolder = "C://Users//Anthony//Desktop//Code//Read_Excel_Files";
+		String excellFolder = "C://Users//Anthony//Desktop//";
 		
 		//Create an output file for data to be written to
 		String filePath = excellFolder + "out_test.xlsx";
@@ -52,6 +52,7 @@ public class Main {
 	        
 			//Save the workbook to the file system
 			workbook.write(outputFile);
+			workbook.close();
 			System.out.println("Saved Excell file to: " + filePath);
 			
 		}

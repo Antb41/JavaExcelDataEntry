@@ -2,24 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="main"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-examples-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-excelant-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-ooxml-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-ooxml-schemas-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/poi-4.1.2/poi-scratchpad-4.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/xmlbeans-2.6.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-collections4-4.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-collections4-4.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-compress-1.20/commons-compress-1.20.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-compress-1.20/commons-compress-1.20-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-compress-1.20/commons-compress-1.20-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-compress-1.20/commons-compress-1.20-tests.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/commons-compress-1.20/commons-compress-1.20-test-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/xmlbeans-3.1.0/lib/resolver.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/xmlbeans-3.1.0/lib/xmlbeans-3.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/xmlbeans-3.1.0/lib/xmlbeans-3.1.0-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Anthony/Downloads/xmlbeans-3.1.0/lib/xmlbeans-3.1.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Anthony/.eclipse/extra dependencies/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Anthony/.eclipse/extra dependencies/commons-codec-1.13.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Anthony/.eclipse/extra dependencies/commons-collections4-4.1.jar"/>
