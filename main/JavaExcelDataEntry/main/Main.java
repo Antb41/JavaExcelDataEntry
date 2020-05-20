@@ -23,11 +23,41 @@ public class Main {
 		
 		//Create an output file for data to be written to
 		String filePath = excellFolder + "out_test.xlsx";
-
+		
+		//Check if workbook needs to be updated or created
+		Scanner update = new Scanner(System.in);
+		String updateCreateAnswer = "";
+		System.out.println("Would you like to create a new workbook or update the existing workbook"
+				+ " at " + filePath + "\n" + "1. Update" + "\n" + "2. Create");
+		System.out.print("Please enter (1) or (2) and hit ENTER: ");
+		updateCreateAnswer = update.nextLine();
+		System.out.println();
+		
+		if(updateCreateAnswer.equals("2")){
+			//create
+			Scanner newFolder = new Scanner(System.in);
+			String newFolderPath = "";
+			System.out.print("Please enter the folder locaton where you would like you excell doc to be created: ");
+			newFolderPath = newFolder.nextLine();
+			System.out.println();
+			filePath = excellFolder;
+			Scanner newDoc = new Scanner(System.in);
+			String newDocName = "";
+			System.out.print("Please enter the name of your excell doc: ");
+			newDocName = newDoc.nextLine();
+			System.out.println();
+			
+			filePath = excellFolder + newDocName;
+	        
+			}else if(updateCreateAnswer.equals("1")){
+				//update
+				
+			}
+				
 		try (FileOutputStream outputFile = new FileOutputStream(filePath)){
 			
 	        //Create new blank workbook
-	        XSSFWorkbook workbook = new XSSFWorkbook();
+	        XSSFWorkbook workbook = new XSSFWorkbook();				
 	        
 	        //Create new blank sheet in workbook 
 	        Sheet sheet = workbook.createSheet("First sheet");
@@ -81,13 +111,10 @@ public class Main {
 	        System.out.println();
 	        cell_1.setCellValue(userPhonenumber);
 	        
-	        
-	        
 			//Save the workbook to the file system
 			workbook.write(outputFile);
 			workbook.close();
 			System.out.println("Saved Excell file to: " + filePath);
-			
 		}
 		
 		catch(IOException ex) {
