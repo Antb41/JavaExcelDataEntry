@@ -6,6 +6,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.xmlbeans.*;
 import org.apache.commons.collections4.*;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -121,7 +123,9 @@ public class Main {
 				System.out.println("The file could not be written: " + ex.getMessage());
 			}
 		
-		}if(updateCreateAnswer.equals("1")){
+		}
+		
+		if(updateCreateAnswer.equals("1")){
 			//update			
 			
 			Scanner newFolder = new Scanner(System.in);
@@ -138,20 +142,28 @@ public class Main {
 			System.out.println();
 			
 			filePath = excellFolder + newDocName;
+			
+			//Get xlxs file that has already been created in specified file path
+			File readFile = new File(filePath);
+			FileInputStream inputStream = new FileInputStream(readFile);
+			XSSFWorkbook readWorkbook = new XSSFWorkbook(inputStream); 
 				
-			try (FileOutputStream outputFile = new FileOutputStream(filePath)){
+			try (FileOutputStream outputFile = new FileOutputStream(new File(filePath))){
 				
-				sheet = workbook.getSheetAt(0);
-				Cell cellUpdate = sheet.getRow(0).getCell(2);
+				//Get specific sheet in workbook
+				Sheet readSheet = readWorkbook.getSheetAt(0);
+				
+				Cell cellUpdate = readSheet.getRow(1).getCell(0);
 				Scanner updateCell = new Scanner(System.in);
 		        String userId = "";
 		        System.out.print("Please Enter A New ID number: ");
 		        userId = updateCell.nextLine();
 				cellUpdate.setCellValue(userId);
+				inputStream.close();
 		        
 				//Save the workbook to the file system
-				workbook.write(outputFile);
-				workbook.close();
+				readWorkbook.write(outputFile);
+				readWorkbook.close();
 				System.out.println("Saved Excell file to: " + filePath);
 			}
 			
