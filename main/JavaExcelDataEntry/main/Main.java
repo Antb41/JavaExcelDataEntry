@@ -135,7 +135,7 @@ public class Main {
 		
 		if(updateCreateAnswer.equals("1")){
 			//update			
-			
+
 			Scanner newFolder = new Scanner(System.in);
 			String newFolderPath = "";
 			System.out.print("Please enter the folder locaton of the excell file you would like to update: ");
@@ -159,15 +159,30 @@ public class Main {
 			try (FileOutputStream outputFile = new FileOutputStream(new File(filePath))){
 				
 				//Get specific sheet in workbook
-				Sheet readSheet = readWorkbook.getSheetAt(0);
+				String sheetSelection = "";
+				Scanner sheetSelectionInput = new Scanner(System.in);
+				System.out.println("\n" + "1. " + readWorkbook.getSheetAt(0).getSheetName() +
+				"\n" + "2. " + readWorkbook.getSheetAt(1).getSheetName());
+				System.out.print("Please select with sheet you would like to update: ");
+				sheetSelection = sheetSelectionInput.nextLine();
+				System.out.println();
+				
+				Sheet readSheet = null;
+				//sheet selection logic
+				if(sheetSelection.equals("1")) {					
+					readSheet = readWorkbook.getSheetAt(0);
+				}else if(sheetSelection.equals("2")) {
+					readSheet = readWorkbook.getSheetAt(1);
+				}
 				
 				//Update cell within selected Excell doc
 				Scanner cellSelection = new Scanner(System.in);
 				String selection = "";
-				System.out.println("\n" + "1. ID (Current: " + readSheet.getRow(1).getCell(0) + ")" +
-				"\n" + "2. Firstname (Current: " + readSheet.getRow(1).getCell(1) + ")" +
-						"\n" + "3. Lastname (Current: " + readSheet.getRow(1).getCell(2) + ")" +
-						"\n" + "4. Phonenumber (Current: " + readSheet.getRow(1).getCell(3) + ")" );
+				System.out.println("\n" + "1. " + readSheet.getRow(0).getCell(0) + " (Current: "
+				+ readSheet.getRow(1).getCell(0) + ")" +
+				"\n" + "2. " + readSheet.getRow(0).getCell(1) + " (Current: " + readSheet.getRow(1).getCell(1) + ")" +
+						"\n" + "3. " + readSheet.getRow(0).getCell(2) + " (Current: " + readSheet.getRow(1).getCell(2) + ")" +
+						"\n" + "4. " + readSheet.getRow(0).getCell(3) + " (Current: " + readSheet.getRow(1).getCell(3) + ")" );
 				System.out.print("Please select with cell you would like to update: ");
 				selection = cellSelection.nextLine();
 				System.out.println();
@@ -177,7 +192,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(0);
 					Scanner updateCell = new Scanner(System.in);
 			        String userId = "";
-			        System.out.print("Please Enter A New ID number: ");
+			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(0) + ": ");
 			        userId = updateCell.nextLine();
 					cellUpdate.setCellValue(userId);
 					inputStream.close();
@@ -190,7 +205,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(1);
 					Scanner updateCell = new Scanner(System.in);
 			        String userFirstname = "";
-			        System.out.print("Please Enter A New Firstname: ");
+			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(1) + ": ");
 			        userFirstname = updateCell.nextLine();
 					cellUpdate.setCellValue(userFirstname);
 					inputStream.close();
@@ -203,7 +218,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(2);
 					Scanner updateCell = new Scanner(System.in);
 			        String userLastname = "";
-			        System.out.print("Please Enter A New Lastname: ");
+			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(2) + ": ");
 			        userLastname = updateCell.nextLine();
 					cellUpdate.setCellValue(userLastname);
 					inputStream.close();
@@ -216,7 +231,7 @@ public class Main {
 					cellUpdate = readSheet.getRow(1).getCell(3);
 					Scanner updateCell = new Scanner(System.in);
 			        String userPhonenumber = "";
-			        System.out.print("Please Enter A New Phonenumber: ");
+			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(3) + ": ");
 			        userPhonenumber = updateCell.nextLine();
 					cellUpdate.setCellValue(userPhonenumber);
 					inputStream.close();
