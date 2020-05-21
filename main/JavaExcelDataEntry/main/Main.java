@@ -41,9 +41,10 @@ public class Main {
         XSSFWorkbook workbook = new XSSFWorkbook();				
         
         //Create new blank sheet in workbook 
-        Sheet sheet = workbook.createSheet("First sheet");
+        Sheet sheet = workbook.createSheet("temp_sheet");
 		
 		if(updateCreateAnswer.equals("2")){
+			
 			//create
 			Scanner newFolder = new Scanner(System.in);
 			String newFolderPath = "";
@@ -58,10 +59,17 @@ public class Main {
 			newDocName = newDocName + ".xlsx";
 			System.out.println();
 			
+			//Concatenate file path
 			filePath = excellFolder + newDocName;
-	        
 			
-				
+			//give temp sheet a customizable name
+	        String sheetName = "";
+	        Scanner sheetNameInput = new Scanner(System.in);
+	        System.out.print("Please enter the name of a sheet for your workbook: ");
+	        sheetName = sheetNameInput.nextLine();
+	        System.out.println();
+	        workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
+	        		
 			try (FileOutputStream outputFile = new FileOutputStream(filePath)){
 		        
 		        //Create a new row within sheet, first row index will be 0
@@ -205,7 +213,7 @@ public class Main {
 					readWorkbook.close();
 					System.out.println("Saved Excell file to: " + filePath);
 				}else if(selection.equals("4")) {
-					cellUpdate = readSheet.getRow(1).getCell(2);
+					cellUpdate = readSheet.getRow(1).getCell(3);
 					Scanner updateCell = new Scanner(System.in);
 			        String userPhonenumber = "";
 			        System.out.print("Please Enter A New Phonenumber: ");
