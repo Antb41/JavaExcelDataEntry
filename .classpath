@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="main"/>
+	<classpathentry excluding="JavaExcelDataEntry/main/" kind="src" path="main"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Anthony/.eclipse/extra dependencies/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Anthony/.eclipse/extra dependencies/commons-codec-1.13.jar"/>

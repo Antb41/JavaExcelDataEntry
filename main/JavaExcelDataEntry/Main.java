@@ -1,4 +1,4 @@
-package JavaExcelDataEntry.main;
+package JavaExcelDataEntry;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -139,6 +139,8 @@ public class Main {
 						System.out.println();
 						sheet = workbook.createSheet(newSheetName);
 						numberOfSheets++;
+					}else if(sheetCreationAnswer.equals("n")){
+						numberOfSheets = -1;
 					}
 				}
 		        
