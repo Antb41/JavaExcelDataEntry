@@ -124,6 +124,15 @@ public class Main {
 					        System.out.println();
 					        cells.setCellValue(dataValues);
 				        }
+				        String dataRowEntry = "";
+				        Scanner dataRowEntryInput = new Scanner(System.in);
+				        System.out.print("Would you like to enter another row of data? (y/n): ");
+				        dataRowEntry = dataRowEntryInput.nextLine();
+				        System.out.println();
+				        if(dataRowEntry.equals("y")) {
+				        	numberOfDataRows++;
+				        }
+				        
 			        }
 			        
 			        String sheetCreationAnswer = "";
