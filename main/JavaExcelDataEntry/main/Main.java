@@ -85,6 +85,7 @@ public class Main {
 		        //Create a new row within sheet, first row index will be 0
 		        Row header = sheet.createRow(0);
 		        for(z = 0; z <= headerRows; z++) {
+		        	
 			        //Create header cells within the rows on the new sheet
 			        Cell cell_header = header.createCell(z);
 			        System.out.print("Please enter the name of a new header: ");
@@ -95,6 +96,7 @@ public class Main {
 			        answer = answerStop.nextLine();
 			        System.out.println();
 			        headerRows++;
+			        
 			        //stop creation of new headers (makes it so z wont be less than headerRows)
 			        if(answer.equals("n")) {
 			        	dataRows = headerRows;
