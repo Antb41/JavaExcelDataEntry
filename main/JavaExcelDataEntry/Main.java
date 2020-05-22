@@ -173,7 +173,7 @@ public class Main {
 			System.out.print("Please enter the folder locaton of the excell file you would like to update: ");
 			newFolderPath = newFolder.nextLine();
 			System.out.println();
-			filePath = excellFolder;
+			filePath = newFolderPath;
 			Scanner newDoc = new Scanner(System.in);
 			String newDocName = "";
 			System.out.print("Please enter the name of the excell doc you would like to update (Do not include .xlsx): ");
@@ -181,7 +181,7 @@ public class Main {
 			newDocName = newDocName + ".xlsx";
 			System.out.println();
 			
-			filePath = excellFolder + newDocName;
+			filePath = newFolderPath + newDocName;
 			
 			//Get xlxs file that has already been created in specified file path
 			File readFile = new File(filePath);
@@ -214,9 +214,14 @@ public class Main {
 				int j = 0;
 				Cell cellUpdate;
 				int v = 0;
+				int k = 0;
 				int rowSelection = 0;
-				for(v = 0; v <= (numberOfRows - 1); v++) {
-					System.out.println((readSheet.getRow(v).getRowNum() + 1));
+				for(v = 1; v <= (numberOfRows - 1); v++) {
+					System.out.print((readSheet.getRow(v).getRowNum()) + ": ");
+					for(k = 0; k <= (numberOfColumns - 1); k++) {
+						System.out.print(readSheet.getRow(v).getCell(k) + ", ");
+					}
+					System.out.println();
 					if(v == (numberOfRows - 1)) {
 						Scanner rowSelectionInput = new Scanner(System.in);
 						System.out.print("Please select which row you would like to update: ");
@@ -226,13 +231,13 @@ public class Main {
 				}
 				
 				for(j = 0; j <= (numberOfColumns - 1); j++) {
-					System.out.println((j + 1) + ". " + readSheet.getRow((rowSelection - 1)).getCell(j) + " (Current: "
-							+ readSheet.getRow(1).getCell(j) + ")");
+					System.out.println((j + 1) + ". " + readSheet.getRow(0).getCell(j) + " (Current: "
+							+ readSheet.getRow(rowSelection).getCell(j) + ")");
 					if(j == (numberOfColumns - 1)) {
 						System.out.print("Please select which column you would like to update: ");
 						cellSelection = cellSelectionInput.nextInt();
 						System.out.println();
-						cellUpdate = readSheet.getRow(1).getCell((cellSelection - 1));
+						cellUpdate = readSheet.getRow(rowSelection).getCell((cellSelection - 1));
 						String updateCell = "";
 				        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell((cellSelection - 1)) 
 				        		+ ": ");
