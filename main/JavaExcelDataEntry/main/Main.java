@@ -65,7 +65,7 @@ public class Main {
 			//give temp sheet a customizable name
 	        String sheetName = "";
 	        Scanner sheetNameInput = new Scanner(System.in);
-	        System.out.print("Please enter the name of a sheet for your workbook: ");
+	        System.out.print("Please enter the name of a new sheet for your workbook: ");
 	        sheetName = sheetNameInput.nextLine();
 	        System.out.println();
 	        workbook.setSheetName(workbook.getSheetIndex(sheet), sheetName);
@@ -82,45 +82,65 @@ public class Main {
 				int z = 0;
 				int headerRows = 0;
 				int dataRows = 0;
-		        //Create a new row within sheet, first row index will be 0
-		        Row header = sheet.createRow(0);
-		        for(z = 0; z <= headerRows; z++) {
-		        	
-			        //Create header cells within the rows on the new sheet
-			        Cell cell_header = header.createCell(z);
-			        System.out.print("Please enter the name of a new header: ");
-			        headerNames = createHeaderNames.nextLine();
-			        System.out.println();
-			        cell_header.setCellValue(headerNames);
-			        System.out.print("Would you like to create another header? (y/n)");
-			        answer = answerStop.nextLine();
-			        System.out.println();
-			        headerRows++;
-			        
-			        //stop creation of new headers (makes it so z wont be less than headerRows)
-			        if(answer.equals("n")) {
-			        	dataRows = headerRows;
-			        	headerRows = 0;
-			        }
-		        }
-		        
-		        //Create new rows and cells and enter data into cells
-			    String dataValues = "";
-		        Scanner input = new Scanner(System.in);
-		        int numberOfDataRows = 0;
-		        int k = 0;
-		        int x = 0;
-		        for(k = 0; k <= numberOfDataRows; k++) {
-			        Row rows = sheet.createRow(k + 1);
-			        for(x = 0; x <= (dataRows - 1); x++) {
-				        Cell cells = rows.createCell(x);
-				        System.out.print("Please enter a/an " 
-				        + header.getCell(x).getStringCellValue() + ": ");
-				        dataValues = input.nextLine();
+				int numberOfSheets = 1;
+				//Create new sheets if needed 
+				int w = 0;
+				for(w = 0; w <= numberOfSheets; w++) {
+			        //Create a new row within sheet, first row index will be 0
+			        Row header = sheet.createRow(0);
+			        for(z = 0; z <= headerRows; z++) {
+			        	
+				        //Create header cells within the rows on the new sheet
+				        Cell cell_header = header.createCell(z);
+				        System.out.print("Please enter the name of a new header: ");
+				        headerNames = createHeaderNames.nextLine();
 				        System.out.println();
-				        cells.setCellValue(dataValues);
+				        cell_header.setCellValue(headerNames);
+				        System.out.print("Would you like to create another header? (y/n): ");
+				        answer = answerStop.nextLine();
+				        System.out.println();
+				        headerRows++;
+				        
+				        //stop creation of new headers (makes it so z wont be less than headerRows)
+				        if(answer.equals("n")) {
+				        	dataRows = headerRows;
+				        	headerRows = 0;
+				        }
 			        }
-		        }
+			        
+			        //Create new rows and cells and enter data into cells
+				    String dataValues = "";
+			        Scanner input = new Scanner(System.in);
+			        int numberOfDataRows = 0;
+			        int k = 0;
+			        int x = 0;
+			        for(k = 0; k <= numberOfDataRows; k++) {
+				        Row rows = sheet.createRow(k + 1);
+				        for(x = 0; x <= (dataRows - 1); x++) {
+					        Cell cells = rows.createCell(x);
+					        System.out.print("Please enter a/an " 
+					        + header.getCell(x).getStringCellValue() + ": ");
+					        dataValues = input.nextLine();
+					        System.out.println();
+					        cells.setCellValue(dataValues);
+				        }
+			        }
+			        
+			        String sheetCreationAnswer = "";
+			        Scanner sheetCreationAnswerInput = new Scanner(System.in);
+					System.out.print("Would you like to create another sheet? (y/n): ");
+					sheetCreationAnswer = sheetCreationAnswerInput.nextLine();
+					System.out.println();
+					if(sheetCreationAnswer.equals("y")) {
+						String newSheetName = "";
+						Scanner newSheetNameInput = new Scanner(System.in);
+				        System.out.print("Please enter the name of a new sheet for your workbook: ");
+				        newSheetName = newSheetNameInput.nextLine();
+						System.out.println();
+						sheet = workbook.createSheet(newSheetName);
+						numberOfSheets++;
+					}
+				}
 		        
 				//Save the workbook to the file system
 				workbook.write(outputFile);
@@ -195,14 +215,15 @@ public class Main {
 						Scanner updateCellInput = new Scanner(System.in);
 				        updateCell = updateCellInput.nextLine();
 						cellUpdate.setCellValue(updateCell);
-						inputStream.close();
-						
-						//Save the workbook to the file system
-						readWorkbook.write(outputFile);
-						readWorkbook.close();
-						System.out.println("Saved Excell file to: " + filePath);
 					}
 				}
+				
+				inputStream.close();	
+				
+				//Save the workbook to the file system
+				readWorkbook.write(outputFile);
+				readWorkbook.close();
+				System.out.println("Saved Excell file to: " + filePath);
 			}
 			
 			catch(IOException ex) {
