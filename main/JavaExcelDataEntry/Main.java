@@ -207,15 +207,28 @@ public class Main {
 				}
 				
 				//Update cell within selected Excell doc
-				int numberOfRows = readSheet.getRow(0).getPhysicalNumberOfCells();
+				int numberOfRows = readSheet.getPhysicalNumberOfRows();
+				int numberOfColumns = readSheet.getRow(0).getPhysicalNumberOfCells();
 				Scanner cellSelectionInput = new Scanner(System.in);
 				int cellSelection = 0;
 				int j = 0;
 				Cell cellUpdate;
-				for(j = 0; j <= (numberOfRows - 1); j++) {
-					System.out.println((j + 1) + ". " + readSheet.getRow(0).getCell(j) + " (Current: "
+				int v = 0;
+				int rowSelection = 0;
+				for(v = 0; v <= (numberOfRows - 1); v++) {
+					System.out.println((readSheet.getRow(v).getRowNum() + 1));
+					if(v == (numberOfRows - 1)) {
+						Scanner rowSelectionInput = new Scanner(System.in);
+						System.out.print("Please select which row you would like to update: ");
+						rowSelection = rowSelectionInput.nextInt();
+						System.out.println();
+					}
+				}
+				
+				for(j = 0; j <= (numberOfColumns - 1); j++) {
+					System.out.println((j + 1) + ". " + readSheet.getRow((rowSelection - 1)).getCell(j) + " (Current: "
 							+ readSheet.getRow(1).getCell(j) + ")");
-					if(j == (numberOfRows - 1)) {
+					if(j == (numberOfColumns - 1)) {
 						System.out.print("Please select which column you would like to update: ");
 						cellSelection = cellSelectionInput.nextInt();
 						System.out.println();
