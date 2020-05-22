@@ -159,87 +159,48 @@ public class Main {
 			try (FileOutputStream outputFile = new FileOutputStream(new File(filePath))){
 				
 				//Get specific sheet in workbook
-				String sheetSelection = "";
+				int numberOfSheets = readWorkbook.getNumberOfSheets();
+				int sheetSelection = 0;
 				Scanner sheetSelectionInput = new Scanner(System.in);
-				System.out.println("\n" + "1. " + readWorkbook.getSheetAt(0).getSheetName() +
-				"\n" + "2. " + readWorkbook.getSheetAt(1).getSheetName());
-				System.out.print("Please select with sheet you would like to update: ");
-				sheetSelection = sheetSelectionInput.nextLine();
-				System.out.println();
-				
+				int i = 0;
 				Sheet readSheet = null;
-				//sheet selection logic
-				if(sheetSelection.equals("1")) {					
-					readSheet = readWorkbook.getSheetAt(0);
-				}else if(sheetSelection.equals("2")) {
-					readSheet = readWorkbook.getSheetAt(1);
+				for(i = 0; i <= (numberOfSheets - 1); i++) {
+					System.out.println((i + 1) + ". " + readWorkbook.getSheetAt(i).getSheetName());
+					if(i == (numberOfSheets - 1)) {
+						System.out.print("Please select with sheet you would like to update: ");
+						sheetSelection = sheetSelectionInput.nextInt();
+						System.out.println();
+						readSheet = readWorkbook.getSheetAt((sheetSelection - 1));
+					}
 				}
 				
 				//Update cell within selected Excell doc
-				Scanner cellSelection = new Scanner(System.in);
-				String selection = "";
-				System.out.println("\n" + "1. " + readSheet.getRow(0).getCell(0) + " (Current: "
-				+ readSheet.getRow(1).getCell(0) + ")" +
-				"\n" + "2. " + readSheet.getRow(0).getCell(1) + " (Current: " + readSheet.getRow(1).getCell(1) + ")" +
-						"\n" + "3. " + readSheet.getRow(0).getCell(2) + " (Current: " + readSheet.getRow(1).getCell(2) + ")" +
-						"\n" + "4. " + readSheet.getRow(0).getCell(3) + " (Current: " + readSheet.getRow(1).getCell(3) + ")" );
-				System.out.print("Please select with cell you would like to update: ");
-				selection = cellSelection.nextLine();
-				System.out.println();
+				int numberOfRows = readSheet.getRow(0).getPhysicalNumberOfCells();
+				Scanner cellSelectionInput = new Scanner(System.in);
+				int cellSelection = 0;
+				int j = 0;
 				Cell cellUpdate;
-				
-				if(selection.equals("1")) {
-					cellUpdate = readSheet.getRow(1).getCell(0);
-					Scanner updateCell = new Scanner(System.in);
-			        String userId = "";
-			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(0) + ": ");
-			        userId = updateCell.nextLine();
-					cellUpdate.setCellValue(userId);
-					inputStream.close();
-			        
-					//Save the workbook to the file system
-					readWorkbook.write(outputFile);
-					readWorkbook.close();
-					System.out.println("Saved Excell file to: " + filePath);
-				}else if(selection.equals("2")) {
-					cellUpdate = readSheet.getRow(1).getCell(1);
-					Scanner updateCell = new Scanner(System.in);
-			        String userFirstname = "";
-			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(1) + ": ");
-			        userFirstname = updateCell.nextLine();
-					cellUpdate.setCellValue(userFirstname);
-					inputStream.close();
-			        
-					//Save the workbook to the file system
-					readWorkbook.write(outputFile);
-					readWorkbook.close();
-					System.out.println("Saved Excell file to: " + filePath);
-				}else if(selection.equals("3")) {
-					cellUpdate = readSheet.getRow(1).getCell(2);
-					Scanner updateCell = new Scanner(System.in);
-			        String userLastname = "";
-			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(2) + ": ");
-			        userLastname = updateCell.nextLine();
-					cellUpdate.setCellValue(userLastname);
-					inputStream.close();
-			        
-					//Save the workbook to the file system
-					readWorkbook.write(outputFile);
-					readWorkbook.close();
-					System.out.println("Saved Excell file to: " + filePath);
-				}else if(selection.equals("4")) {
-					cellUpdate = readSheet.getRow(1).getCell(3);
-					Scanner updateCell = new Scanner(System.in);
-			        String userPhonenumber = "";
-			        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell(3) + ": ");
-			        userPhonenumber = updateCell.nextLine();
-					cellUpdate.setCellValue(userPhonenumber);
-					inputStream.close();
-			        
-					//Save the workbook to the file system
-					readWorkbook.write(outputFile);
-					readWorkbook.close();
-					System.out.println("Saved Excell file to: " + filePath);
+				for(j = 0; j <= (numberOfRows - 1); j++) {
+					System.out.println((j + 1) + ". " + readSheet.getRow(0).getCell(j) + " (Current: "
+							+ readSheet.getRow(1).getCell(j) + ")");
+					if(j == (numberOfRows - 1)) {
+						System.out.print("Please select which column you would like to update: ");
+						cellSelection = cellSelectionInput.nextInt();
+						System.out.println();
+						cellUpdate = readSheet.getRow(1).getCell((cellSelection - 1));
+						String updateCell = "";
+				        System.out.print("Please Enter A New " + readSheet.getRow(0).getCell((cellSelection - 1)) 
+				        		+ ": ");
+						Scanner updateCellInput = new Scanner(System.in);
+				        updateCell = updateCellInput.nextLine();
+						cellUpdate.setCellValue(updateCell);
+						inputStream.close();
+						
+						//Save the workbook to the file system
+						readWorkbook.write(outputFile);
+						readWorkbook.close();
+						System.out.println("Saved Excell file to: " + filePath);
+					}
 				}
 			}
 			
