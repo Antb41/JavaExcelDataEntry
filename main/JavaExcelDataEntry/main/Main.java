@@ -72,54 +72,53 @@ public class Main {
 	        		
 			try (FileOutputStream outputFile = new FileOutputStream(filePath)){
 		        
+				//input for allowing the user to stop creating headers
+				String answer = "";
+				Scanner answerStop = new Scanner(System.in);
+				
+				//input for allowing user to customize header names
+				String headerNames = "";
+				Scanner createHeaderNames = new Scanner(System.in);
+				int z = 0;
+				int headerRows = 0;
+				int dataRows = 0;
 		        //Create a new row within sheet, first row index will be 0
 		        Row header = sheet.createRow(0);
+		        for(z = 0; z <= headerRows; z++) {
+			        //Create header cells within the rows on the new sheet
+			        Cell cell_header = header.createCell(z);
+			        System.out.print("Please enter the name of a new header: ");
+			        headerNames = createHeaderNames.nextLine();
+			        System.out.println();
+			        cell_header.setCellValue(headerNames);
+			        System.out.print("Would you like to create another header? (y/n)");
+			        answer = answerStop.nextLine();
+			        System.out.println();
+			        headerRows++;
+			        //stop creation of new headers (makes it so z wont be less than headerRows)
+			        if(answer.equals("n")) {
+			        	dataRows = headerRows;
+			        	headerRows = 0;
+			        }
+		        }
 		        
-		        //Create header cells within the rows on the new sheet
-		        Cell cell_header = header.createCell(0);
-		        cell_header.setCellValue("ID");
-		        
-		        cell_header = header.createCell(1);
-		        cell_header.setCellValue("FIRSTNAME");
-		        
-		        cell_header = header.createCell(2);
-		        cell_header.setCellValue("LASTNAME");
-		        
-		        cell_header = header.createCell(3);
-		        cell_header.setCellValue("PHONENUMBER");
-		        
-		        //Create data row and cells for header cells, allow for user input using scanner
+		        //Create new rows and cells and enter data into cells
+			    String dataValues = "";
 		        Scanner input = new Scanner(System.in);
-		        
-		        Row row_1 = sheet.createRow(1);  
-		        
-		        Cell cell_1 = row_1.createCell(0);
-		        String userId = "";
-		        System.out.print("Please Enter Your ID number: ");
-		        userId = input.nextLine();
-		        System.out.println();
-		        cell_1.setCellValue(userId);
-		        
-		        cell_1 = row_1.createCell(1);
-		        String userFirstname = "";
-		        System.out.print("Please Enter Your Firstname: ");
-		        userFirstname = input.nextLine();
-		        System.out.println();
-		        cell_1.setCellValue(userFirstname);
-		        
-		        cell_1 = row_1.createCell(2);
-		        String userLastname = "";
-		        System.out.print("Please Enter Your Lastname: ");
-		        userLastname = input.nextLine();
-		        System.out.println();
-		        cell_1.setCellValue(userLastname);
-		        
-		        cell_1 = row_1.createCell(3);
-		        String userPhonenumber = "";
-		        System.out.print("Please Enter Your Phonenumber: ");
-		        userPhonenumber = input.nextLine();
-		        System.out.println();
-		        cell_1.setCellValue(userPhonenumber);
+		        int numberOfDataRows = 0;
+		        int k = 0;
+		        int x = 0;
+		        for(k = 0; k <= numberOfDataRows; k++) {
+			        Row rows = sheet.createRow(k + 1);
+			        for(x = 0; x <= (dataRows - 1); x++) {
+				        Cell cells = rows.createCell(x);
+				        System.out.print("Please enter a/an " 
+				        + header.getCell(x).getStringCellValue() + ": ");
+				        dataValues = input.nextLine();
+				        System.out.println();
+				        cells.setCellValue(dataValues);
+			        }
+		        }
 		        
 				//Save the workbook to the file system
 				workbook.write(outputFile);
